@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Sadettin Güneş İç Dekorasyon"
+description = "Bursa merkezli iç dekorasyon ve tadilat ustası Sadettin Güneş'in hizmetlerini, tamamlanan işlerini ve iletişim bilgilerini modern bir vitrin deneyimiyle sunan profesyonel web sitesi."
+version = "1.0.0"
+id = "artifacts/sadettin-gunes-dekorasyon"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 23881
+
+[services.development]
+run = "pnpm --filter @workspace/sadettin-gunes-dekorasyon run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/sadettin-gunes-dekorasyon", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/sadettin-gunes-dekorasyon/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "23881"
+BASE_PATH = "/"
